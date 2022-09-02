@@ -1,0 +1,91 @@
+@model Meeting
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/site.css" >
+    <title>testing</title>
+</head>
+<body class="body-class sp-bt">
+    <div class="page-header">
+        <h1 class="center-text">Local Hoops <i class="fa-solid fa-basketball spinner"></i></h1>
+        <p class="sublogo center-text"><em>Where North Park YMCA Members Compete.</em></p> 
+    </div>
+
+    <div class="home-button">
+    <button class="home-btn"><a href="/dashboard">Home</a></button> 
+    </div>
+
+    <form asp-controller="User" asp-action="Logout" method="POST" class="logout-form">
+    <button class="logout-btn">Logout</button>
+    </form> 
+
+    <div class="sprinkle"></div>
+
+
+    @* PAGE CONTENTS *@
+    <div class="page-contents">
+        <p class="quick-thanks">Thank you for being an active YMCA member.</p>
+
+        <div class="inner-session-contents">
+
+            <div class="session-info-container">
+
+                <h1>@Model.Title</h1>
+
+
+                <h3>Organizer by @Model.Creator.FullName()</h3>
+
+
+
+                <hr />
+                <p>Date: @Model.Date</p>
+                <p>Description: @Model.Description</p>
+
+                <p>Players List:</p>
+                <ul>
+                    @foreach(Connection item in ViewBag.guestList)
+                    {
+                        <li>@item.User.FullName()</li>
+                    }
+                </ul>
+            </div>
+
+            @* CONDITIONAL DELETE/JOIN/LEAVE *@
+            @{
+                <div class="view-btn-action">
+                @if(@Model.UserId == Context.Session.GetInt32("UUID"))
+                {
+                    <td>
+                        <form asp-controller="Meeting" asp-action="DeleteMeeting" asp-route-id="@Model.MeetingId" method="POST">
+                            <button>Delete Session</button>
+                        </form>
+                    </td>
+                }
+                else if(@Model.Connections.Any(c => c.UserId == Context.Session.GetInt32("UUID")))
+                {
+                    <td>
+                        <form asp-controller="Meeting" asp-action="Leave" asp-route-id="@Model.MeetingId" method="POST">
+                            <button>Leave Session</button>
+                        </form>
+                    </td>
+                }
+                else{
+                    <td>
+                        <form asp-controller="Meeting" asp-action="Join" asp-route-id="@Model.MeetingId" method="POST">
+                            <button>Join Session</button>
+                        </form>
+                    </td>
+                }
+                </div>
+            }
+
+
+    </div>
+
+
+</body>
+</html>
+

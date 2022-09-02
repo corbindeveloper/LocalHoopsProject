@@ -1,0 +1,88 @@
+@model Meeting
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/site.css" >
+    <title>testing</title>
+</head>
+<body class="body-class sp-bt">
+    <div class="page-header">
+        <h1 class="center-text">Local Hoops <i class="fa-solid fa-basketball spinner"></i></h1>
+        <p class="sublogo center-text"><em>Where North Park YMCA Members Compete.</em></p> 
+    </div>
+
+  <div class="home-button">
+    <button class="home-btn"><a href="/dashboard">Home</a></button> 
+  </div>
+
+  <form asp-controller="User" asp-action="Logout" method="POST" class="logout-form">
+    <button class="logout-btn">Logout</button>
+  </form> 
+
+  <div class="sprinkle"></div>
+
+  <div class="page-contents">
+    <h1 class="page-title solid-white-bg">Create your Basketball Session</h1>
+
+
+    <form asp-controller="Meeting" asp-action="submitMeeting" method="POST" class="new-form">
+
+        @* TITLE *@
+        <div class="mb-3">
+          <label asp-for="Title"></label>
+          <span asp-validation-for="Title" class="text-danger font-weight-bold">
+          </span>
+          <input class="form-control" asp-for="Title">
+        </div>
+
+        @* DATE *@
+        <div class="mb-3">
+          <label asp-for="Date"></label>
+          <span asp-validation-for="Date" class="text-danger font-weight-bold">
+          </span>
+          <input class="form-control" asp-for="Date" type="datetime-local">
+        </div>
+
+        @* TIME *@
+        <div class="mb-3">
+          <label>Duration:</label>
+          <span asp-validation-for="Time" class="text-danger font-weight-bold">
+          </span>
+          <input class="form-control" asp-for="Time">
+        </div>
+
+        @* DURATION *@
+        <div class="mb-3">
+          @* <label asp-for="Duration"></label> *@
+          <span asp-validation-for="Duration" class="text-danger font-weight-bold">
+          </span>
+          <select asp-for="Duration" type="number">
+            <option value="minutes">Minutes</option>
+            <option value="hours">Hours</option>
+            <option value="day">Days</option>
+          </select>
+        </div>
+
+        @* DESCRIPTION *@
+        <div class="mb-3">
+          <label asp-for="Description"></label>
+          <span asp-validation-for="Description" class="text-danger font-weight-bold">
+          </span>
+          <input class="form-control" asp-for="Description" placeholder="Is it 5 on 5?">
+        </div>
+
+        <button>Reserve the gym!</button>
+
+    </form>
+  </div>
+
+</body>
+</html>

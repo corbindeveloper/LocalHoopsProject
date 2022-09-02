@@ -1,0 +1,68 @@
+@model User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/site.css" >
+    <title>testing</title>
+</head>
+<body class="body-class">
+
+<div class="enter-form">
+
+  <h3 class="center-text">Register</h3>
+
+  <form asp-controller="User" asp-action="Register" method="POST">
+
+      @* First Name *@
+      <div class="mb-3">
+        <label asp-for="FirstName"></label>
+        <span asp-validation-for="FirstName" class="text-danger font-weight-bold">
+        </span>
+        <input class="form-control" asp-for="FirstName">
+      </div>
+
+      @* Last Name *@
+      <div class="mb-3">
+        <label asp-for="LastName"></label>
+        <span asp-validation-for="LastName" class="text-danger font-weight-bold">
+        </span>
+        <input class="form-control" asp-for="LastName">
+      </div>
+
+      @* Email  *@
+      <div class="mb-3">
+        <label asp-for="Email"></label>
+        <span asp-validation-for="Email" class="text-danger font-weight-bold">
+        </span>
+        <input class="form-control" asp-for="Email">
+      </div>
+
+      @* Password  *@
+      <div class="mb-3">
+        <label asp-for="Password"></label>
+        <span asp-validation-for="Password" class="text-danger font-weight-bold">
+        </span>
+        <input class="form-control" asp-for="Password">
+      </div>
+
+      @* Confirm Password  *@
+      <div class="mb-3">
+        <label asp-for="ConfirmPassword"></label>
+        <span asp-validation-for="ConfirmPassword" class="text-danger font-weight-bold">
+        </span>
+        <input class="form-control" asp-for="ConfirmPassword">
+      </div>
+
+      <button class="create-acc hvr-bounce-to-bottom">Create Account</button>
+
+  </form>
+
+  <p class="have-acct center-text"> <a href="/userlogin">Already have an account? <span class="login-link">Login</span></a></p>
+
+</div>
+</body>
+</html>
